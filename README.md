@@ -23,27 +23,27 @@ As such, to join an existing `webring++`, you just need one of the other nodes t
 To host forward links in `webring++`, you must host an endpoint that serves JSON matching the schema indicated below.
 `webring++` endpoints are scoped by hostport, which means that the following are all the same:
 
-- `a.com:8080/webring++`
-- `https://a.com/webring++`
+- `a.com:8080/webring++.json`
+- `https://a.com/webring++.json`
 
 The following are not valid, and are ignored:
 
-- `a.com/blog/webring++`
-- `geocities.blog/blakeh/webring++`
+- `a.com/blog/webring++.json`
+- `geocities.blog/blakeh/webring++.json`
 
 The following are all valid, but fall into different hostports and so do not collide (they exist in parallel):
 
-- `blog.coolwebshit.com/webring++`
-- `forums.coolwebshit.com/webring++`
-- `anything.else.really.coolwebshit.com/webring++`
+- `blog.coolwebshit.com/webring++.json`
+- `forums.coolwebshit.com/webring++.json`
+- `anything.else.really.coolwebshit.com/webring++.json`
 
 ### Schema
 
-The top-level `/webring++` endpoint should serve JSON with the following schema:
+The top-level `/webring++.json` endpoint should serve JSON with the following schema:
 
 Key       | Description
 ---       | ---
-`version` | Number. Valid value is `0`. Future versions may support larger values.
-`links` | List of Strings. Each string should be a URI which represents a forward link. Anything after [`port`](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Syntax) must be ignored by the client.
+`version` | Number. Valid value is `0` or `1`.
+`links` | List of Strings. Each string should be a URI which represents a forward link. Anything after [`port`](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Syntax) should be ignored by the client.
 
 **Clients must permit deserialisation of unknown object keys for forward-compatibility**.
